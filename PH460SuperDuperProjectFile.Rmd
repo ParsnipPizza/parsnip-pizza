@@ -1,0 +1,114 @@
+---
+title: "PUB HLTH 460 Project Powell"
+author: "Robert Powell"
+date: "12/3/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(stringr)
+```
+
+```{r format}
+beds <- read.csv("C:/Users/SGOKT/Documents/Pub460 HW and Assignments/Total Year Round Beds.csv")
+View(beds)
+
+state_pop <- read.csv("C:/Users/SGOKT/Documents/Pub460 HW and Assignments/state_pop.csv")
+View(state_pop)
+#Now the edited data has been read in
+
+#below this is how to remove the commas and spaces in the numbers
+beds$X2007 <- as.character(beds$X2007)
+str_replace_all(beds$X2007, fixed(","), "")
+beds2007 <- as.numeric(str_replace_all(beds$X2007, fixed(","), ""))
+
+state_pop$X2007 <- as.character(state_pop$X2007)
+str_replace_all(state_pop$X2007, fixed(","), "")
+state2007 <- as.numeric(str_replace_all(state_pop$X2007, fixed(","), ""))
+```
+
+```{r gdp read}
+#Removed first few and last few rows as they held textual writing that was obstructing the reading in process.
+gdp <- read.csv("C:/Users/SGOKT/Documents/Pub460 HW and Assignments/GDP by State.csv")
+View(gdp)
+```
+
+```{r 2007}
+beds$X2007 <- as.double(beds$X2007)
+
+plot(gdp$X2007, beds$X2007)
+abline(lm(beds$X2007~gdp$X2007))
+
+summary(lm(beds$X2007~gdp$X2007))
+```
+
+```{r 2008}
+
+beds$X2008 <- as.double(beds$X2008)
+
+plot(gdp$X2008, beds$X2008)
+abline(lm(beds$X2008~gdp$X2008))
+
+summary(lm(beds$X2008~gdp$X2008))
+
+
+```
+
+```{r 2009}
+
+beds$X2009 <- as.double(beds$X2009)
+
+plot(gdp$X2009, beds$X2009)
+abline(lm(beds$X2009~gdp$X2009))
+
+summary(lm(beds$X2009~gdp$X2009))
+
+
+```
+
+
+```{r dates}
+beds <- transform(beds, Pop_vs_Bed2007 = state2007 / beds2007)
+View(beds)
+
+plot(gdp$X2008, beds$X2008)
+abline(lm(beds$X2008~gdp$X2008))
+
+plot(gdp$X2009, beds$X2009)
+abline(lm(beds$X2009~gdp$X2009))
+
+plot(gdp$X2010, beds$X2010)
+abline(lm(beds$X2010~gdp$X2010))
+
+plot(gdp$X2011, beds$X2011)
+abline(lm(beds$X2011~gdp$X2011))
+
+plot(gdp$X2012, beds$X2012)
+abline(lm(beds$X2012~gdp$X2012))
+
+plot(gdp$X2013, beds$X2013)
+abline(lm(beds$X2013~gdp$X2013))
+
+plot(gdp$X2014, beds$X2014)
+abline(lm(beds$X2014~gdp$X2014))
+
+plot(gdp$X2015, beds$X2015)
+abline(lm(beds$X2015~gdp$X2015))
+
+plot(gdp$X2016, beds$X2016)
+abline(lm(beds$X2016~gdp$X2016))
+
+plot(gdp$X2017, beds$X2017)
+abline(lm(beds$X2017~gdp$X2017))
+
+plot(gdp$X2018, beds$X2018)
+abline(lm(beds$X2018~gdp$X2018))
+```
+
+```{r amended}
+plot(gdp$X2007, beds$Pop_vs_Bed)
+abline(lm(beds$Pop_vs_Bed~gdp$X2007))
+```
+This was the work that my group did together, below is my own extra findings, specifically looking into state spending on homeless as opposed to pure GDP.
+
